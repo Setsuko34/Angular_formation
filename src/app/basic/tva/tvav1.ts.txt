@@ -1,0 +1,42 @@
+import { Component } from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {DecimalPipe} from '@angular/common';
+
+@Component({
+  selector: 'app-tva',
+  imports: [
+    FormsModule,
+    DecimalPipe
+  ],
+  templateUrl: './tvav1.html.txt',
+  styleUrl: './tva.css',
+})
+export class Tva {
+   prixHT: number = 0;
+   taux :  number = 20;
+   tauxSel : number | undefined = undefined; //taux sélectionné
+   tva : number = 0;
+   ttc : number = 0;
+  mapTauxCategorieProd= new Map<number,string[]>();
+  listeCategoriePourTauxSel: string[] = [];
+  constructor(){
+    this.mapTauxCategorieProd.set(20 , [ "services" ,"outils" , "objets"]);
+    this.mapTauxCategorieProd.set(10 , [ "transports" ,"hotels" , "restaurants" , "spectacles" , "médicaments"]);
+    this.mapTauxCategorieProd.set(5 , [ "aliments" ,"énergies" , "livres" ]);
+    this.onSelectTaux(20);
+  }
+   prixttc(){
+     this.tva = this.prixHT * this.taux / 100;
+     this.ttc = this.prixHT + this.tva;
+   }
+  onSelectTaux(tauxSel: number) {
+    this.tauxSel = tauxSel;
+    this.listeCategoriePourTauxSel = this.mapTauxCategorieProd.get(tauxSel) || [];
+    this.prixttc();
+  }
+
+  getTauxArray(): number[] {
+    return Array.from(this.mapTauxCategorieProd.keys()).sort((a, b) => b - a);
+  }
+
+}

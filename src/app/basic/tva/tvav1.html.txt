@@ -11,7 +11,8 @@
       <label class="block text-sm font-semibold text-gray-700 mb-2">Prix HT (€)</label>
       <input
         type="number"
-        (input)="onPrixHTChange($event)"
+        [(ngModel)]="prixHT"
+        (input)="prixttc()"
         class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition text-lg"
         placeholder="0.00"
         min="0"
@@ -24,12 +25,13 @@
       <select
         name="taux"
         id="taux"
-        (change)="onSelectTaux($event)"
+        [(ngModel)]="taux"
+        (change)="prixttc();"
         class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition text-lg bg-white cursor-pointer"
       >
-        @for (taux of tauxPossibles; track taux) {
-          <option value="{{ taux }}">{{ taux }}%</option>
-        }
+        <option value="5">5%</option>
+        <option value="10">10%</option>
+        <option value="20">20%</option>
       </select>
     </div>
 
@@ -38,19 +40,19 @@
       <!-- TVA -->
       <div class="flex justify-between items-center pb-4 border-b-2 border-blue-200">
         <span class="text-gray-700 font-semibold">Montant TVA :</span>
-        <span class="text-2xl font-bold text-blue-600">{{ tva() }} €</span>
+        <span class="text-2xl font-bold text-blue-600">{{ tva | number:'1.0-2'}} €</span>
       </div>
 
       <!-- Prix TTC -->
       <div class="flex justify-between items-center pt-2">
         <span class="text-gray-800 font-bold text-lg">Prix TTC :</span>
-        <span class="text-3xl font-bold text-indigo-600">{{ ttc() }} €</span>
+        <span class="text-3xl font-bold text-indigo-600">{{ ttc | number:'1.0-2' }} €</span>
       </div>
     </div>
 
     <!-- Résumé -->
     <div class="mt-6 p-4 bg-gray-50 rounded-lg text-sm text-gray-600 text-center">
-      <p>{{ prixHT() }} € + {{ tva() }} € = <strong class="text-gray-800">{{ ttc() }} €</strong></p>
+      <p>{{ prixHT }} € + {{ tva }} € = <strong class="text-gray-800">{{ ttc | number:'1.0-2'}} €</strong></p>
     </div>
     <!-- Colonne droite: Taux et Catégories -->
     <div>
@@ -60,7 +62,7 @@
         <ul class="space-y-2">
           @for (tauxItem of getTauxArray(); track tauxItem) {
             <li (click)="onSelectTaux(tauxItem)"
-               [class.taux-selected]="tauxSel.valueOf() === tauxItem"
+               [class.taux-selected]="tauxSel === tauxItem"
                 class="p-3 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:border-blue-500 hover:bg-blue-50"
             >
               <span class="font-semibold text-gray-800">{{ tauxItem }}%</span>
@@ -73,11 +75,11 @@
       <!-- Catégories pour le taux sélectionné -->
       <div class="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 flex d-flex justify-content-center align-items-center">
         <h3 class="text-lg font-bold text-gray-800 mb-4">
-          📦 Catégories ({{ tauxSel() }}%)
+          📦 Catégories ({{ tauxSel }}%)
         </h3>
         @if (listeCategoriePourTauxSel.length > 0) {
           <ul class="space-y-2 pl-5">
-            @for (categorie of listeCategoriePourTauxSel(); track categorie) {
+            @for (categorie of listeCategoriePourTauxSel; track categorie) {
               <li class="text-gray-700 list-disc">{{ categorie }}</li>
             }
           </ul>

@@ -1,1 +1,119 @@
-<p>calculatrice works!</p>
+<div class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 p-6 flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-2xl">
+    <!-- En-tête -->
+    <div class="mb-8 text-center">
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">🧮 Calculatrice Angular</h1>
+      <p class="text-gray-600">Effectuez vos calculs facilement</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Colonne gauche: Calcul -->
+      <div>
+        <!-- Entrée A -->
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre A</label>
+          <input
+            type="number"
+            [(ngModel)]="a"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition text-lg"
+            placeholder="0"
+          />
+        </div>
+
+        <!-- Entrée B -->
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre B</label>
+          <input
+            type="number"
+            [(ngModel)]="b"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition text-lg"
+            placeholder="0"
+          />
+        </div>
+
+        <!-- Boutons Opérations -->
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-gray-700 mb-4">Opération</label>
+          <div class="flex gap-3">
+            <button
+              (click)="onCalculer('+')"
+              class="flex-1 px-4 py-3 bg-green-500 text-white font-bold text-lg rounded-lg hover:bg-green-600 transition transform hover:scale-105 active:scale-95"
+            >
+              +
+            </button>
+            <button
+              (click)="onCalculer('-')"
+              class="flex-1 px-4 py-3 bg-red-500 text-white font-bold text-lg rounded-lg hover:bg-red-600 transition transform hover:scale-105 active:scale-95"
+            >
+              −
+            </button>
+            <button
+              (click)="onCalculer('*')"
+              class="flex-1 px-4 py-3 bg-blue-500 text-white font-bold text-lg rounded-lg hover:bg-blue-600 transition transform hover:scale-105 active:scale-95"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+
+        <!-- Résultat -->
+        <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border-2 border-purple-200">
+          <p class="text-sm font-semibold text-gray-700 mb-2">Résultat</p>
+          <p
+            [style.font-weight]="res > 0 ? 'bold' : 'normal'"
+            [class.negatif]="res < 0"
+            class="text-4xl font-bold text-purple-600"
+          >
+            {{ res }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Colonne droite: Historique & Zone souris -->
+      <div class="space-y-6">
+        <!-- Historique -->
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <input
+              type="checkbox"
+              [(ngModel)]="montrerHisto"
+              class="w-5 h-5 cursor-pointer accent-purple-500"
+            />
+            <label class="text-sm font-semibold text-gray-700 cursor-pointer">
+              Voir l'historique des calculs
+            </label>
+          </div>
+
+          @if (montrerHisto) {
+            <div class="bg-gray-50 border-2 border-gray-300 rounded-lg p-4 max-h-48 overflow-y-auto">
+              @if (historiqueCalculs.length > 0) {
+                <ul class="space-y-2">
+                  @for (h of historiqueCalculs; track h) {
+                    <li class="text-sm text-gray-700 bg-white px-3 py-2 rounded border-l-4 border-purple-500">
+                      {{ h }}
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <p class="text-gray-500 italic text-sm">Aucun calcul effectué</p>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Zone Souris -->
+        <div
+          class="c2 bg-blue-50 border-2 border-blue-300 rounded-lg p-6 min-h-32 flex flex-col justify-center items-center text-center cursor-crosshair"
+          (mousemove)="onMouseMove($event)"
+          (mouseout)="onMouseLeave($event)"
+        >
+          <p class="text-sm font-semibold text-gray-700 mb-3">Survolez cette zone avec votre souris</p>
+          <div class="text-2xl font-bold text-blue-600">
+            <p>x = {{ x }}</p>
+            <p>y = {{ y }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
