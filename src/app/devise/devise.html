@@ -1,0 +1,62 @@
+<div class="min-h-screen bg-gradient-to-br from-amber-50 to-yellow-100 p-6 flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-lg">
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">💱 Gestion des Devises</h1>
+      <p class="text-gray-600">Consulter et modifier les cours</p>
+    </div>
+
+    <table class="w-full mb-6">
+      <thead>
+      <tr>
+        <th class="p-2">Code</th>
+        <th class="p-2">Nom</th>
+        <th class="p-2">Change</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (d of devises$ | async; track d.code) {
+          <tr>
+            <td class="p-2">{{ d.code }}</td>
+            <td class="p-2">{{ d.name }}</td>
+            <td class="p-2">{{ d.change }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <hr class="my-6"/>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Code devise à modifier :</label>
+        <input [(ngModel)]="codeToUpdate"
+               class="w-full box-border px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-amber-500 focus:outline-none transition text-lg"
+               placeholder="ex: JPY, GBP" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Nouveau change :</label>
+        <input [(ngModel)]="changeToUpdate" type="number"
+               class="w-full box-border px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-amber-500 focus:outline-none transition text-lg"
+               placeholder="ex: 0.9, 1.1" />
+      </div>
+
+      <button (click)="onUpdate()"
+              class="w-full px-4 py-3 bg-amber-500 text-white font-bold text-lg rounded-lg hover:bg-amber-600 transition transform hover:scale-105 active:scale-95">
+        Mettre à jour
+      </button>
+    </div>
+
+    <hr class="my-6"/>
+
+    @if (message()) {
+      <div class="p-4 rounded-lg border-2"
+           [class]="message() === 'mise à jour ok' ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'">
+        <p [class]="message() === 'mise à jour ok' ? 'text-green-700' : 'text-red-700'"
+           class="font-semibold text-center text-sm break-all">
+          {{ message() }}
+        </p>
+      </div>
+    }
+  </div>
+</div>

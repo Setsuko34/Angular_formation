@@ -8,6 +8,7 @@ import { Signal, signal, computed } from '@angular/core';
     FormsModule],
   templateUrl: './tva.html',
   styleUrl: './tva.css',
+  standalone: true
 })
 export class Tva {
    prixHT= signal<number>(0);

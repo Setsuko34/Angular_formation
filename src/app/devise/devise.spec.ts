@@ -1,0 +1,22 @@
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
+//
+// import { DeviseComponent } from './devise';
+//
+// describe('DeviseComponent', () => {
+//   let component: DeviseComponent;
+//   let fixture: ComponentFixture<DeviseComponent>;
+//
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       imports: [DeviseComponent],
+//     }).compileComponents();
+//
+//     fixture = TestBed.createComponent(DeviseComponent);
+//     component = fixture.componentInstance;
+//     await fixture.whenStable();
+//   });
+//
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

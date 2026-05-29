@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './simpleselector.html',
   styleUrl: './simpleselector.css',
+  standalone: true
 })
 export class SimpleselectorComponent {
   // Input : titre du sélecteur

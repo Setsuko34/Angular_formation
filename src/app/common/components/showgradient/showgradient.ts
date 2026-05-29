@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './showgradient.html',
   styleUrl: './showgradient.css',
+  standalone: true
 })
 export class ShowgradientComponent {
   // Input : la couleur sélectionnée

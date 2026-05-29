@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
   imports: [FormsModule],
   templateUrl: './calculatrice.html',
   styleUrl: './calculatrice.css',
+  standalone: true
 })
 export class Calculatrice {
   a : number = 0;
