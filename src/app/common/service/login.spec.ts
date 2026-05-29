@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DeviseService } from './devise';
+import { Login } from './login';
 
-describe('Devise', () => {
-  let service: DeviseService;
+describe('Login', () => {
+  let service: Login;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DeviseService);
+    service = TestBed.inject(Login);
   });
 
   it('should be created', () => {
