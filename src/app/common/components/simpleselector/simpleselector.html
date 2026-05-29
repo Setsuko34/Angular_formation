@@ -1,0 +1,20 @@
+<div class="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 w-80 shadow-md">
+  <h3 class="text-lg font-bold text-gray-800 mb-4">{{ title() }}</h3>
+
+  <div class="flex flex-wrap gap-3 mb-6">
+    @for (value of values(); track value) {
+      <button
+        (click)="onSelect(value)"
+        [class.btn-selected]="selectedValue === value"
+        class="px-4 py-2 border-2 border-gray-300 rounded-lg cursor-pointer transition font-semibold text-gray-700 hover:border-blue-500 hover:bg-blue-50"
+      >
+        {{ value }}
+      </button>
+    }
+  </div>
+
+  <div [ngClass]="getResultBoxClasses()"  class="rounded-lg p-4">
+    <p class="text-sm text-gray-600">Sélectionné :</p>
+    <p [ngClass]="getResultTextClasses()" class="text-2xl font-bold">{{ selectedValue || 'Aucun' }}</p>
+  </div>
+</div>

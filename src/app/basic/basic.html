@@ -1,3 +1,20 @@
 <p>basic works!</p>
-<app-calculatrice></app-calculatrice>
+<app-toggle-panel [title]="'Choix Couleur'">
+  <div class="flex gap-8 items-start">
+    <!-- SimpleSelector à gauche -->
+    <div>
+      <app-simple-selector        title="Choix couleur"        [values]="['purple', 'green', 'blue']"        (choix)="onChoixCouleur($event)">
+      </app-simple-selector>
+    </div>
+
+    <!-- ShowGradient à droite -->
+    <app-show-gradient [selectedColor]="couleurChoisie"></app-show-gradient>
+  </div>
+</app-toggle-panel>
+
+<app-toggle-panel [title]="'Calculatrice'">
+  <app-calculatrice></app-calculatrice>
+</app-toggle-panel>
+<app-toggle-panel [title]="'TVA'">
 <app-tva></app-tva>
+</app-toggle-panel>

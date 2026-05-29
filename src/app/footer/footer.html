@@ -3,4 +3,11 @@
     <p class="mb-2">© 2026 Angular App. Tous droits réservés.</p>
     <p class="text-gray-400">Construit avec ❤️ et Angular</p>
   </div>
+  <p class="piedPage">footer - couleurFondPreferee:
+    <select [(ngModel)]="preferencesService.couleurFondPreferee" >
+      @for(c of listeCouleurs; track c){
+        <option [ngValue]="c">{{c}}</option>
+      }
+    </select>
+  </p>
 </footer>

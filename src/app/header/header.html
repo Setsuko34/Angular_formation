@@ -1,11 +1,12 @@
 <!-- Navigation -->
-<nav class="bg-white shadow-md sticky top-0 z-50">
+<nav [style.background-color]="preferencesService.couleurFondPreferee" class="bg-white shadow-md sticky top-0 z-50">
   <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-blue-600">🚀 Angular App</h1>
+    <h1 class="text-2xl font-bold text-blue-600">🚀 {{ titre() }}</h1>
     <ul class="flex gap-8">
       <li><a href="#" class="text-gray-700 hover:text-blue-600 transition font-semibold">Accueil</a></li>
       <li><a href="ngr-basic" class="text-gray-700 hover:text-blue-600 transition font-semibold">Outils</a></li>
       <li><a href="ngr-login" class="text-gray-700 hover:text-blue-600 transition font-semibold">Login</a></li>
+      <li><a href="ngr-conversion" class="text-gray-700 hover:text-blue-600 transition font-semibold">Conversion</a></li>
     </ul>
   </div>
 </nav>
